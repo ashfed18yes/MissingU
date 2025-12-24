@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Saanvi 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Caveat:wght@700&family=Quicksand:wght@600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+        
+        #stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; transform: scale(1.2); } }
+        
+        .floating-pets { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .floating-pet { position: absolute; font-size: 50px; opacity: 0; animation: floatPet 15s infinite ease-in-out; }
+        @keyframes floatPet {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(-50px) rotate(360deg); opacity: 0; }
+        }
+        
+        .container { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        
+        #scene1 { text-align: center; animation: fadeIn 1.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .cat-container { margin-bottom: 30px; animation: gentleBounce 2s ease-in-out infinite; }
+        @keyframes gentleBounce { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+        
+        .cat-illustration { width: 220px; height: 220px; margin: 0 auto 20px; filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.6)); }
+        
+        .poster {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(255, 192, 203, 0.15));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 182, 193, 0.3);
+            border-radius: 25px;
+            padding: 35px 45px;
+            box-shadow: 0 15px 50px rgba(255, 105, 180, 0.4);
+            max-width: 380px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .poster-text { font-family: 'Pacifico', cursive; font-size: 36px; background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.5; }
+        .poster-emoji { font-size: 32px; display: inline-block; animation: heartbeat 1.5s ease-in-out infinite; filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8)); }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        
+        .cta-button {
+            margin-top: 40px; background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%); color: white; border: none; padding: 20px 55px;
+            border-radius: 50px; font-size: 20px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 40px rgba(255, 20, 147, 0.6);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .cta-button:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 50px rgba(255, 20, 147, 0.8); }
+        
+        #scene2 { display: none; width: 100%; max-width: 1000px; animation: fadeIn 1s ease-out; padding: 40px 20px; }
+        .scene2-heading { font-family: 'Pacifico', cursive; font-size: 48px; background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ffc0cb, #ff1493); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 60px; }
+        
+        .cats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; margin-bottom: 40px; }
+        @media (max-width: 768px) { .cats-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } }
+        @media (max-width: 480px) { .scene2-heading { font-size: 36px; } }
+        
+        .cat-card {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.15), rgba(255, 105, 180, 0.1));
+            backdrop-filter: blur(10px); border: 2px solid rgba(255, 182, 193, 0.3); border-radius: 25px; padding: 25px;
+            text-align: center; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+        }
+        .cat-card:hover { transform: translateY(-12px) scale(1.05) rotate(-2deg); box-shadow: 0 20px 50px rgba(255, 105, 180, 0.6); }
+        .cat-card.revealed { opacity: 0.5; transform: scale(0.9); }
+        .cat-mini { width: 100px; height: 100px; margin: 0 auto; filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.5)); }
+        
+        .message-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
+        .message-card { border-radius: 35px; padding: 60px 50px; max-width: 550px; width: 100%; box-shadow: 0 25px 80px rgba(255, 105, 180, 0.6); text-align: center; animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); border: 3px solid; backdrop-filter: blur(15px); }
+        @keyframes popIn { 0% { transform: scale(0.3) rotate(-10deg); opacity: 0; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+        
+        .theme-0 { background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2)); border-color: #ff69b4; }
+        .theme-1 { background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(147, 112, 219, 0.2)); border-color: #9370db; }
+        .theme-2 { background: linear-gradient(135deg, rgba(255, 192, 203, 0.3), rgba(255, 105, 180, 0.2)); border-color: #ffc0cb; }
+        .theme-3 { background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(255, 105, 180, 0.2)); border-color: #ff1493; }
+        .theme-4 { background: linear-gradient(135deg, rgba(186, 85, 211, 0.3), rgba(221, 160, 221, 0.2)); border-color: #dda0dd; }
+        .theme-5 { background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(255, 192, 203, 0.2)); border-color: #ffb6c1; }
+        .theme-6 { background: linear-gradient(135deg, rgba(216, 112, 147, 0.3), rgba(219, 112, 147, 0.2)); border-color: #db7093; }
+        .theme-7 { background: linear-gradient(135deg, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.2)); border-color: #ff69b4; }
+        .theme-8 { background: linear-gradient(135deg, rgba(255, 0, 127, 0.3), rgba(255, 20, 147, 0.2)); border-color: #ff007f; }
+        
+        .message-cat { width: 140px; height: 140px; margin: 0 auto 35px; animation: wiggleSpin 0.8s ease-in-out; filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.8)); font-size: 100px; display: flex; align-items: center; justify-content: center; }
+        @keyframes wiggleSpin { 0% { transform: rotate(0deg) scale(0.5); opacity: 0; } 50% { transform: rotate(180deg) scale(1.2); } 100% { transform: rotate(360deg) scale(1); opacity: 1; } }
+        
+        .message-text { font-family: 'Caveat', cursive; font-size: 28px; color: #fff; line-height: 1.8; margin-bottom: 35px; font-weight: 700; text-shadow: 0 0 20px rgba(255, 105, 180, 0.8); animation: slideInText 0.8s ease-out; }
+        @keyframes slideInText { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .close-button { background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%); color: white; border: none; padding: 15px 45px; border-radius: 50px; font-size: 18px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 25px rgba(255, 20, 147, 0.5); }
+        .close-button:hover { transform: scale(1.08); box-shadow: 0 12px 35px rgba(255, 20, 147, 0.7); }
+        
+        .special-button {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ffd700 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .special-button:not(:disabled):hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 15px 50px rgba(255, 215, 0, 0.6); }
+            50% { box-shadow: 0 15px 60px rgba(255, 105, 180, 0.8); }
+        }
+        
+        .special-button:disabled {
+            background: linear-gradient(135deg, #666 0%, #999 100%);
+        }
+        
+        .footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-family: 'Pacifico', cursive; font-size: 20px; background: linear-gradient(135deg, #ffb6c1, #ff69b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; z-index: 100; }
+    </style>
+</head>
+<body>
+    <div id="stars"></div>
+    <div class="floating-pets" id="floatingPets"></div>
+    
+    <div class="container">
+        <div id="scene1">
+            <div class="cat-container">
+                <svg class="cat-illustration" viewBox="0 0 200 200">
+                    <ellipse cx="100" cy="130" rx="45" ry="50" fill="#ff69b4"/>
+                    <circle cx="100" cy="80" r="40" fill="#ff69b4"/>
+                    <path d="M 70 60 L 60 30 L 80 55 Z" fill="#ff69b4"/>
+                    <path d="M 130 60 L 140 30 L 120 55 Z" fill="#ff69b4"/>
+                    <path d="M 72 58 L 66 40 L 78 56 Z" fill="#ff1493"/>
+                    <path d="M 128 58 L 134 40 L 122 56 Z" fill="#ff1493"/>
+                    <path d="M 82 75 Q 88 78 94 75" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M 106 75 Q 112 78 118 75" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <ellipse cx="75" cy="85" rx="8" ry="5" fill="#ff1493" opacity="0.4"/>
+                    <ellipse cx="125" cy="85" rx="8" ry="5" fill="#ff1493" opacity="0.4"/>
+                    <ellipse cx="100" cy="90" rx="5" ry="4" fill="#ff1493"/>
+                    <path d="M 100 90 Q 95 96 90 94" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M 100 90 Q 105 96 110 94" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <line x1="65" y1="82" x2="45" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="65" y1="88" x2="45" y2="88" stroke="#333" stroke-width="1.5"/>
+                    <line x1="135" y1="82" x2="155" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="135" y1="88" x2="155" y2="88" stroke="#333" stroke-width="1.5"/>
+                    <ellipse cx="70" cy="140" rx="14" ry="38" fill="#ff69b4"/>
+                    <ellipse cx="130" cy="140" rx="14" ry="38" fill="#ff69b4"/>
+                    <path d="M 140 150 Q 165 135 170 115" stroke="#ff69b4" stroke-width="20" fill="none" stroke-linecap="round"/>
+                    <path d="M 100 120 C 100 115, 95 110, 90 110 C 85 110, 82 113, 82 117 C 82 122, 100 135, 100 135 C 100 135, 118 122, 118 117 C 118 113, 115 110, 110 110 C 105 110, 100 115, 100 120 Z" fill="#ff1493" opacity="0.6"/>
+                </svg>
+                
+                <div class="poster">
+                    <div class="poster-text">
+                        Hi Saanvi<br>
+                        I miss you a lot <span class="poster-emoji">💗</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="cta-button" onclick="showScene2()">Want to know why?</button>
+        </div>
+        
+        <div id="scene2">
+            <h1 class="scene2-heading">Because you have got…</h1>
+            <div class="cats-grid" id="catsGrid"></div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="special-button" id="specialButton" onclick="showSpecialMessage()" style="opacity: 0.3; cursor: not-allowed;" disabled>
+                    ✨ Click here after discovering all messages ✨
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="message-modal" id="messageModal">
+        <div class="message-card" id="messageCard">
+            <div class="message-cat" id="modalCat"></div>
+            <div class="message-text" id="messageText"></div>
+            <button class="close-button" onclick="closeModal()">💗 Next</button>
+        </div>
+    </div>
+    
+    <div class="footer">Made with love for Saanvi 💗</div>
+    
+    <script>
+        const messages = [
+            "The most perfect arms that feel like home, where I belong, wrapped in your warmth forever 🤗",
+            "The most mesmerizing eyes that hold galaxies within them, and I get lost willingly every single time 👁️",
+            "The sweetest voice that's my favorite melody, one I could listen to on repeat for eternity 🎵",
+            "The most beautiful smile that stops time itself and makes my heart skip beats I didn't know existed 😊",
+            "The most magical laugh that's like sunshine breaking through clouds, lighting up even my darkest days ✨",
+            "The most fascinating mind that captivates me, challenges me, and makes me fall deeper with every conversation 🧠",
+            "The most calming presence that feels like peace itself, my safe haven in this chaotic world 🕊️",
+            "The most precious heart so full of love that I feel like the luckiest person alive just to be loved by you 💝",
+            "And because of all that… you've completely captured my heart, and honestly? I never want it back. You've got me, completely and forever. 💍"
+        ];
+        
+        const messageEmojis = ["🤗", "👁️", "🎵", "😊", "✨", "🧠", "🕊️", "💝", "💍"];
+        
+        const catThemes = [
+            { body: '#ff69b4', inner: '#ff1493', detail: '#ff007f' },
+            { body: '#9370db', inner: '#8a2be2', detail: '#7b68ee' },
+            { body: '#ffc0cb', inner: '#ff69b4', detail: '#ff1493' },
+            { body: '#ff1493', inner: '#ff007f', detail: '#c71585' },
+            { body: '#dda0dd', inner: '#ba55d3', detail: '#9370db' },
+            { body: '#ffb6c1', inner: '#ff69b4', detail: '#ff1493' },
+            { body: '#db7093', inner: '#c71585', detail: '#8b008b' },
+            { body: '#ff69b4', inner: '#ff1493', detail: '#ff007f' },
+            { body: '#ff007f', inner: '#ff1493', detail: '#c71585' }
+        ];
+        
+        let revealedCats = new Set();
+        
+        function createStars() {
+            const c = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.animationDelay = Math.random() * 3 + 's';
+                c.appendChild(s);
+            }
+        }
+        
+        function createFloatingPets() {
+            const c = document.getElementById('floatingPets');
+            const pets = ['🐱', '🐶', '🐈', '🐕', '😺', '🐾', '💗', '💕', '✨', '⭐', '🌙', '💖', '🦋', '🌸'];
+            setInterval(() => {
+                const p = document.createElement('div');
+                p.className = 'floating-pet';
+                p.textContent = pets[Math.floor(Math.random() * pets.length)];
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                c.appendChild(p);
+                setTimeout(() => p.remove(), 18000);
+            }, 1500);
+        }
+        
+        function generateCatSVG(theme, id) {
+            const eyes = [
+                `<path d="M 82 75 Q 88 78 94 75" stroke="#333" stroke-width="3" fill="none"/><path d="M 106 75 Q 112 78 118 75" stroke="#333" stroke-width="3" fill="none"/>`,
+                `<path d="M 88 73 C 88 70, 85 68, 82 68 C 79 68, 77 70, 77 73 C 77 76, 88 82, 88 82 C 88 82, 99 76, 99 73 C 99 70, 97 68, 94 68 C 91 68, 88 70, 88 73 Z" fill="${theme.detail}"/><path d="M 112 73 C 112 70, 109 68, 106 68 C 103 68, 101 70, 101 73 C 101 76, 112 82, 112 82 C 112 82, 123 76, 123 73 C 123 70, 121 68, 118 68 C 115 68, 112 70, 112 73 Z" fill="${theme.detail}"/>`,
+                `<circle cx="88" cy="75" r="5" fill="#333"/><path d="M 106 75 Q 112 78 118 75" stroke="#333" stroke-width="3" fill="none"/>`,
+                `<circle cx="88" cy="75" r="6" fill="#333"/><circle cx="85" cy="72" r="2" fill="white"/><circle cx="112" cy="75" r="6" fill="#333"/><circle cx="109" cy="72" r="2" fill="white"/>`,
+                `<ellipse cx="88" cy="75" rx="7" ry="10" fill="#333"/><ellipse cx="88" cy="72" rx="3" ry="4" fill="white"/><ellipse cx="112" cy="75" rx="7" ry="10" fill="#333"/><ellipse cx="112" cy="72" rx="3" ry="4" fill="white"/>`,
+                `<path d="M 80 75 L 96 75" stroke="#333" stroke-width="3"/><path d="M 104 75 L 120 75" stroke="#333" stroke-width="3"/>`,
+                `<circle cx="88" cy="75" r="5" fill="#333"/><circle cx="112" cy="75" r="5" fill="#333"/><circle cx="85" cy="73" r="2" fill="white" opacity="0.8"/><circle cx="109" cy="73" r="2" fill="white" opacity="0.8"/>`,
+                `<path d="M 82 75 Q 88 72 94 75" stroke="#333" stroke-width="3" fill="none"/><path d="M 106 75 Q 112 72 118 75" stroke="#333" stroke-width="3" fill="none"/>`,
+                `<ellipse cx="88" cy="75" rx="8" ry="5" fill="#333"/><circle cx="85" cy="74" r="2" fill="white"/><ellipse cx="112" cy="75" rx="8" ry="5" fill="#333"/><circle cx="109" cy="74" r="2" fill="white"/>`
+            ];
+            return `<ellipse cx="100" cy="130" rx="45" ry="50" fill="${theme.body}"/>
+                <circle cx="100" cy="80" r="40" fill="${theme.body}"/>
+                <path d="M 70 60 L 60 30 L 80 55 Z" fill="${theme.body}"/>
+                <path d="M 130 60 L 140 30 L 120 55 Z" fill="${theme.body}"/>
+                <path d="M 72 58 L 66 40 L 78 56 Z" fill="${theme.inner}"/>
+                <path d="M 128 58 L 134 40 L 122 56 Z" fill="${theme.inner}"/>
+                ${eyes[id]}
+                <ellipse cx="75" cy="85" rx="8" ry="5" fill="${theme.detail}" opacity="0.4"/>
+                <ellipse cx="125" cy="85" rx="8" ry="5" fill="${theme.detail}" opacity="0.4"/>
+                <ellipse cx="100" cy="90" rx="5" ry="4" fill="${theme.detail}"/>
+                <path d="M 100 90 Q 95 96 90 94" stroke="#333" stroke-width="2" fill="none"/>
+                <path d="M 100 90 Q 105 96 110 94" stroke="#333" stroke-width="2" fill="none"/>
+                <line x1="65" y1="82" x2="45" y2="80" stroke="#333" stroke-width="1.5"/>
+                <line x1="135" y1="82" x2="155" y2="80" stroke="#333" stroke-width="1.5"/>
+                <ellipse cx="70" cy="140" rx="14" ry="38" fill="${theme.body}"/>
+                <ellipse cx="130" cy="140" rx="14" ry="38" fill="${theme.body}"/>
+                <path d="M 140 150 Q 165 135 170 115" stroke="${theme.body}" stroke-width="20" fill="none"/>
+                <path d="M 100 120 C 100 115, 95 110, 90 110 C 85 110, 82 113, 82 117 C 82 122, 100 135, 100 135 C 100 135, 118 122, 118 117 C 118 113, 115 110, 110 110 C 105 110, 100 115, 100 120 Z" fill="${theme.detail}" opacity="0.6"/>`;
+        }
+        
+        function generateCats() {
+            const g = document.getElementById('catsGrid');
+            for (let i = 0; i < 9; i++) {
+                const c = document.createElement('div');
+                c.className = 'cat-card';
+                c.setAttribute('data-cat-id', i);
+                c.onclick = () => showMessage(i);
+                const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                s.setAttribute('class', 'cat-mini');
+                s.setAttribute('viewBox', '0 0 200 200');
+                s.innerHTML = generateCatSVG(catThemes[i], i);
+                c.appendChild(s);
+                g.appendChild(c);
+            }
+        }
+        
+        function showScene2() {
+            document.getElementById('scene1').style.display = 'none';
+            document.getElementById('scene2').style.display = 'block';
+            generateCats();
+        }
+        
+        function showMessage(id) {
+            const m = document.getElementById('messageModal');
+            const c = document.getElementById('messageCard');
+            const cat = document.getElementById('modalCat');
+            const txt = document.getElementById('messageText');
+            
+            c.className = 'message-card theme-' + id;
+            cat.textContent = messageEmojis[id];
+            txt.textContent = messages[id];
+            
+            revealedCats.add(id);
+            document.querySelector(`[data-cat-id="${id}"]`).classList.add('revealed');
+            
+            // Check if all cats are revealed
+            if (revealedCats.size === 9) {
+                const btn = document.getElementById('specialButton');
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }
+            
+            m.style.display = 'flex';
+        }
+        
+        function showSpecialMessage() {
+            const m = document.getElementById('messageModal');
+            const c = document.getElementById('messageCard');
+            const cat = document.getElementById('modalCat');
+            const txt = document.getElementById('messageText');
+            
+            c.className = 'message-card theme-8';
+            cat.textContent = '🤍';
+            txt.innerHTML = 'Main har baar words mein acha nahi hota, par ek baat hamesha sach rehti hai<br><br>tu yaad aati hai. Bohot pyaari si yaad 🤍';
+            
+            m.style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+        
+        createStars();
+        createFloatingPets();
+        
+        document.getElementById('messageModal').addEventListener('click', (e) => {
+            if (e.target.id === 'messageModal') closeModal();
+        });
+    </script>
+</body>
+</html>
